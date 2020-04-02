@@ -1,0 +1,13 @@
+{
+    "puppet_task_version": 1,
+    "supports_noop": false,
+    "description": "Create a ServiceNow Standard Change Request",
+    "files": ["ruby_task_helper/files/task_helper.rb"],
+    "remote": true,
+    "parameters": {
+        "standard_change_template_id": {
+            "description": "Service Now Change Request Template ID",
+            "type": "String[1]"
+        }
+    }
+}

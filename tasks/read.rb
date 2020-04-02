@@ -21,6 +21,7 @@ def return_error(message)
 end
 
 # This task reads incidents
+# Set the lookup field to 'sysid' to lookup by sys_id
 class SnowRead < TaskHelper
   def task(table: 'incident',
            lookup_field: 'number',

@@ -1,0 +1,21 @@
+{
+    "puppet_task_version": 1,
+    "supports_noop": false,
+    "description": "Update a ServiceNow object",
+    "files": ["ruby_task_helper/files/task_helper.rb"],
+    "remote": true,
+    "parameters": {
+        "type": {
+            "description": "ServiceNow Change Request Type (Standard, Normal, or Emergency)",
+            "type": "Optional[String[1]]"
+        },
+        "sys_id": {
+            "description": "ServiceNow sys_id",
+            "type": "String[1]"
+        },
+        "data": {
+            "description": "ServiceNow data",
+            "type": "String[1]"
+        }
+    }
+}
