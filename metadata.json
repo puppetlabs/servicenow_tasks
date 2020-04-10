@@ -1,12 +1,12 @@
 {
-  "name": "beersy-snow_record",
-  "version": "0.1.5",
-  "author": "Abir Majumdar",
+  "name": "puppetlabs-servicenow_tasks",
+  "version": "0.0.1",
+  "author": "puppet",
   "summary": "Series of tasks to interact with a ServiceNow Instance",
   "license": "Apache-2.0",
-  "source": "http://github.com/maju6406/snow_record",
-  "project_page": "http://github.com/maju6406/snow_record",
-  "issues_url": "http://github.com/maju6406/snow_record/issues",
+  "source": "http://github.com/puppetlabs/servicenow_tasks",
+  "project_page": "http://github.com/puppetlabs/servicenow_tasks",
+  "issues_url": "http://github.com/puppetlabs/servicenow_tasks/issues",
   "dependencies": [
     {
       "name": "puppetlabs/ruby_task_helper",

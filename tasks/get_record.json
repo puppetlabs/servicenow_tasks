@@ -1,0 +1,17 @@
+{
+    "puppet_task_version": 1,
+    "supports_noop": false,
+    "description": "Get a ServiceNow record",
+    "remote": true,
+    "files": ["ruby_task_helper/files/task_helper.rb"],
+    "parameters": {
+        "table": {
+            "description": "ServiceNow table",
+            "type": "String[1]"
+        },
+        "sys_id": {
+            "description": "ServiceNow sys_id",
+            "type": "String[1]"
+        }
+    }
+}

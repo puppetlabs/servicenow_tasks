@@ -1,0 +1,21 @@
+{
+    "puppet_task_version": 1,
+    "supports_noop": false,
+    "description": "Update a ServiceNow record",
+    "files": ["ruby_task_helper/files/task_helper.rb"],
+    "remote": true,
+    "parameters": {
+        "table": {
+            "description": "ServiceNow table",
+            "type": "String[1]"
+        },
+        "sys_id": {
+            "description": "ServiceNow sys_id",
+            "type": "String[1]"
+        },
+        "fields": {
+            "description": "ServiceNow fields to be updated. This is a hash of <field_name> => <value>",
+            "type": "Hash[Any, Any, 1]"
+        }
+    }
+}
