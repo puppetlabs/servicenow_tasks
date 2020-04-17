@@ -1,16 +1,16 @@
 {
     "puppet_task_version": 1,
     "supports_noop": false,
-    "description": "Create a ServiceNow object",
-    "files": ["ruby_task_helper/files/task_helper.rb"],
+    "description": "Delete a Servicenow record",
     "remote": true,
+    "files": ["ruby_task_helper/files/task_helper.rb"],
     "parameters": {
         "table": {
             "description": "ServiceNow table",
-            "type": "Optional[String[1]]"
+            "type": "String[1]"
         },
-        "data": {
-            "description": "ServiceNow data",
+        "sys_id": {
+            "description": "ServiceNow sys_id",
             "type": "String[1]"
         }
     }
