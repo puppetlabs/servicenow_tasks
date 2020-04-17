@@ -13,7 +13,7 @@ class SnowCreateIncident < TaskHelper
   def task(urgency: nil,
            priority: nil,
            severity: nil,
-           additional_data: {},
+           additional_data: '{}',
            _target: nil,
            **_kwargs)
     user = _target[:user]
