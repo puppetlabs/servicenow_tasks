@@ -3,7 +3,7 @@
     "supports_noop": false,
     "description": "Get a ServiceNow record",
     "remote": true,
-    "files": ["ruby_task_helper/files/task_helper.rb"],
+    "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now_request.rb"],
     "parameters": {
         "table": {
             "description": "ServiceNow table",

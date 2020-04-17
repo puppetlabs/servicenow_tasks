@@ -1,7 +1,7 @@
 #!/opt/puppetlabs/puppet/bin/ruby
 
 require_relative '../../ruby_task_helper/files/task_helper.rb'
-require '../lib/service_now_request.rb'
+require_relative '../lib/service_now_request.rb'
 
 # This task updates records
 class ServiceNowUpdate < TaskHelper

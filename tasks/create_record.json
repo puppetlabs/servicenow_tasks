@@ -2,7 +2,7 @@
     "puppet_task_version": 1,
     "supports_noop": false,
     "description": "Create a ServiceNow record",
-    "files": ["ruby_task_helper/files/task_helper.rb"],
+    "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now_request.rb"],
     "remote": true,
     "parameters": {
         "table": {
