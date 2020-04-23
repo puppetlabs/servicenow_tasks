@@ -2,7 +2,7 @@
     "puppet_task_version": 1,
     "supports_noop": false,
     "description": "Update a ServiceNow record",
-    "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now_request.rb"],
+    "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_integration/lib/service_now_request.rb"],
     "remote": true,
     "parameters": {
         "table": {

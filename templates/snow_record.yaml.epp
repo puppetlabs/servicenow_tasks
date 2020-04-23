@@ -1,0 +1,13 @@
+<%- | String $snowinstance,
+      String $user,
+      String $password,
+      String $table,
+      String $sys_id
+| -%>
+---
+snowinstance: <%= $snowinstance %>
+snowinstance: <%= $snowinstance %>
+user: <%= $user %>
+password: <%= $password %>
+table: <%= $table %>
+sys_id: <%= $sys_id %>

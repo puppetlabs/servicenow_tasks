@@ -35,6 +35,6 @@ class ServiceNowRequest
       puts [pretty_response]
     end
   rescue => e
-    raise TaskHelper::Error.new('Failure!', 'servicenow_tasks.print_response', e)
+    raise TaskHelper::Error.new('Failure!', 'servicenow_integration.print_response', e)
   end
 end
