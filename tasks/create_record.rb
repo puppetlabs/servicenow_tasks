@@ -7,12 +7,16 @@ require_relative '../lib/service_now_request.rb'
 class ServiceNowCreate < TaskHelper
   def task(table: nil,
            fields: nil,
+           user: nil,
+           password: nil,
+           instance: nil,
            _target: nil,
            **_kwargs)
 
-    user = _target[:user]
-    password = _target[:password]
-    instance = _target[:name]
+    # Use the inventory file credentials if no user, password, or instance is passed in via parameters.
+    user = _target[:user] if user.nil?
+    password = _target[:password] if password.nil?
+    instance = _target[:name] if instance.nil?
 
     uri = "https://#{instance}.service-now.com/api/now/table/#{table}"
 

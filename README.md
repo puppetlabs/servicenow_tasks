@@ -44,12 +44,20 @@ nodes:
         password: "XHxH2tmZ69*Vbh"
 ```
 
+Tasks can also be executed via puppet by specifying `user`, `password`, and `instance` parameters. Credentials specified via parameters will take precedence over any in an inventory file.
+
 ## Usage
 
 To get a record from the incident table with sys_id = `3Db9b91557db00101096dde37a48961976`
 
 ```bash
 bolt task run --nodes dev84270 servicenow_tasks::get_record table=incident sys_id=3Db9b91557db00101096dde37a48961976
+```
+
+or without an inventory file,
+
+```bash
+bolt task run --nodes dev84270 servicenow_tasks::get_record user=my_username password=my_password instance=my_instance table=incident sys_id=3Db9b91557db00101096dde37a48961976
 ```
 
 Further example usage is provided via `bolt task show`
