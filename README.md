@@ -33,6 +33,7 @@ nodes:
       remote:
         user: admin
         password: "XHxH2tmZ69*Vbh"
+        oauth_token: vXpDyYklhkNxwQ5ktr7WmTinZwq4-g-RSXtCVA5Y6JDKWU8-OBC3GUHbQIcWZyp1z1dKHK4_3-O8NQTzkWVCJw
 ```
 
 > Bolt 1.x inventory entry
@@ -47,11 +48,14 @@ targets:
       remote:
         user: admin
         password: "XHxH2tmZ69*Vbh"
+        oauth_token: vXpDyYklhkNxwQ5ktr7WmTinZwq4-g-RSXtCVA5Y6JDKWU8-OBC3GUHbQIcWZyp1z1dKHK4_3-O8NQTzkWVCJw
 ```
 
 > Bolt 2.x inventory entry
 
-Tasks can also be executed via puppet by specifying `user`, `password`, and `instance` parameters. Credentials specified via parameters will take precedence over any in an inventory file.
+Tasks can also be executed via puppet by specifying `user`/`password` or `oauth_token`, and `instance` parameters. Credentials specified via parameters will take precedence over any in an inventory file.
+
+OAuth authentication will be used over a user/password if an oauth token is provided in either the inventory file or passsed as a parameter.
 
 ## Usage
 

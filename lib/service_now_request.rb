@@ -6,12 +6,14 @@ require 'openssl'
 
 # This class organizes ruby http code used by all of the tasks.
 class ServiceNowRequest
-  def initialize(uri, http_verb, body, user, password)
+  # oauth_token is used for auth if provided.
+  def initialize(uri, http_verb, body, user = nil, password = nil, oauth_token = nil)
     @uri = URI.parse(uri)
     @http_verb = http_verb.capitalize
     @body = body.to_json
     @user = user
     @password = password
+    @oauth_token = oauth_token
   end
 
   def print_response
@@ -26,7 +28,11 @@ class ServiceNowRequest
       # Add uri, fields and authentication to request
       request = request_class.new("#{@uri.path}?#{@uri.query}", header)
       request.body = @body
-      request.basic_auth(@user, @password)
+      if @oauth_token
+        request['Authorization'] = "Bearer #{@oauth_token}"
+      else
+        request.basic_auth(@user, @password)
+      end
       # Make request to ServiceNow
       response = http.request(request)
       # Parse and print response
@@ -35,6 +41,6 @@ class ServiceNowRequest
       puts [pretty_response]
     end
   rescue => e
-    raise TaskHelper::Error.new('Failure!', 'servicenow_tasks.print_response', e)
+    raise "Request failed, #{e}"
   end
 end
