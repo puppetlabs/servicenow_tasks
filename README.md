@@ -27,7 +27,7 @@ Tasks can be executed via Bolt by supplying a basic inventory file. For example,
 
 ```bash
 nodes:
-  - name: dev85564
+  - name: dev84270.service-now.com
     config:
       transport: remote
       remote:
@@ -42,7 +42,7 @@ If you're using Bolt 2.x, then this would look something like:
 
 ```bash
 targets:
-  - uri: dev85564
+  - uri: dev84270.service-now.com
     config:
       transport: remote
       remote:
@@ -62,13 +62,13 @@ OAuth authentication will be used over a user/password if an oauth token is prov
 To get a record from the incident table with sys_id = `3Db9b91557db00101096dde37a48961976`
 
 ```bash
-bolt task run --nodes dev84270 servicenow_tasks::get_record table=incident sys_id=3Db9b91557db00101096dde37a48961976
+bolt task run --nodes dev84270.service-now.com servicenow_tasks::get_record table=incident sys_id=3Db9b91557db00101096dde37a48961976
 ```
 
 or without an inventory file,
 
 ```bash
-bolt task run --nodes dev84270 servicenow_tasks::get_record user=my_username password=my_password instance=my_instance table=incident sys_id=3Db9b91557db00101096dde37a48961976
+bolt task run --nodes dev84270.service-now.com servicenow_tasks::get_record user=my_username password=my_password instance=my_instance table=incident sys_id=3Db9b91557db00101096dde37a48961976
 ```
 
 Further example usage is provided via `bolt task show`

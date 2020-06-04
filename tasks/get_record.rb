@@ -20,7 +20,7 @@ class ServiceNowGet < TaskHelper
     oauth_token = _target[:oauth_token] if oauth_token.nil?
     instance = _target[:name] if instance.nil?
 
-    uri = "https://#{instance}.service-now.com/api/now/table/#{table}/#{sys_id}"
+    uri = "https://#{instance}/api/now/table/#{table}/#{sys_id}"
 
     request = ServiceNowRequest.new(uri, 'Get', nil, user, password, oauth_token)
     request.print_response
