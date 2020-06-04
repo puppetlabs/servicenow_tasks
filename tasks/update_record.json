@@ -29,6 +29,11 @@
         "instance": {
             "description": "ServiceNow instance name. If your instance uri is https://dev84270.service-now.com your instance name would be dev84270.",
             "type": "Optional[String[1]]"
+        },
+        "oauth_token": {
+            "description": "ServiceNow OAuth token.",
+            "type": "Optional[String[1]]",
+            "sensitive": true
         }
     }
 }
