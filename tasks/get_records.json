@@ -1,0 +1,35 @@
+{
+    "puppet_task_version": 1,
+    "supports_noop": false,
+    "description": "Gets the records in the given ServiceNow table",
+    "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now_request.rb"],
+    "remote": true,
+    "parameters": {
+        "table": {
+            "description": "ServiceNow table",
+            "type": "String[1]"
+        },
+        "fields": {
+            "description": "ServiceNow fields to filter on. This is a hash of <field_name> => <value>",
+            "type": "Optional[Hash[Any, Any, 1]]"
+        },
+        "user": {
+            "description": "ServiceNow username",
+            "type": "Optional[String[1]]"
+        },
+        "password": {
+            "description": "ServiceNow password",
+            "type": "Optional[String[1]]",
+            "sensitive": true
+        },
+        "instance": {
+            "description": "ServiceNow instance. For example, dev84270.service-now.com.",
+            "type": "Optional[String[1]]"
+        },
+        "oauth_token": {
+            "description": "ServiceNow OAuth token",
+            "type": "Optional[String[1]]",
+            "sensitive": true
+        }
+    }
+}
