@@ -35,10 +35,12 @@ class ServiceNowRequest
       end
       # Make request to ServiceNow
       response = http.request(request)
-      # Parse and print response
-      json_response = JSON.parse(response.body)
-      pretty_response = JSON.pretty_unparse(json_response)
-      puts [pretty_response]
+      if response.body
+        # Parse and print response
+        json_response = JSON.parse(response.body)
+        pretty_response = JSON.pretty_unparse(json_response)
+        puts [pretty_response]
+      end
     end
   rescue => e
     raise "Request failed, #{e}"
