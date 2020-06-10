@@ -9,8 +9,8 @@
             "description": "ServiceNow table",
             "type": "String[1]"
         },
-        "fields": {
-            "description": "ServiceNow fields to filter on. This is a hash of <field_name> => <value>",
+        "url_params": {
+            "description": "URL parameters for the GET table endpoint. See https://developer.servicenow.com/dev.do#!/reference/api/orlando/rest/c_TableAPI for the complete list.",
             "type": "Optional[Hash[Any, Any, 1]]"
         },
         "user": {
