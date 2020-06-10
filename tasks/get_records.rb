@@ -7,7 +7,7 @@ require_relative '../lib/service_now_request.rb'
 # This task creates records
 class ServiceNowGetRecords < TaskHelper
   def task(table: nil,
-           fields: nil,
+           url_params: nil,
            user: nil,
            password: nil,
            instance: nil,
@@ -21,13 +21,13 @@ class ServiceNowGetRecords < TaskHelper
     oauth_token = _target[:oauth_token] if oauth_token.nil?
     instance = _target[:name] if instance.nil?
 
-    fields ||= {}
-    fields_as_params = fields.map do |name, value|
+    url_params ||= {}
+    url_params = url_params.map do |name, value|
       "#{CGI.escape(name.to_s)}=#{CGI.escape(value.to_s)}"
     end
-    fields_as_params = fields_as_params.join('&')
+    url_params = url_params.join('&')
 
-    uri = "https://#{instance}/api/now/table/#{table}?#{fields_as_params}"
+    uri = "https://#{instance}/api/now/table/#{table}?#{url_params}"
 
     request = ServiceNowRequest.new(uri, 'Get', nil, user, password, oauth_token)
     request.print_response
