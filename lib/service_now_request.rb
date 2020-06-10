@@ -35,7 +35,7 @@ class ServiceNowRequest
       end
       # Make request to ServiceNow
       response = http.request(request)
-      if response.body
+      if response.body && !response.body.empty?
         # Parse and print response
         json_response = JSON.parse(response.body)
         pretty_response = JSON.pretty_unparse(json_response)
