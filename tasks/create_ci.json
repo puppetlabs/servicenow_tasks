@@ -1,17 +1,25 @@
 {
     "puppet_task_version": 1,
     "supports_noop": false,
-    "description": "Create a ServiceNow CI",
+    "description": "Create a ServiceNow CI from a Puppet DB query result",
     "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now_request.rb"],
     "remote": true,
     "parameters": {
         "table": {
-            "description": "ServiceNow table. Defaults to cmdb_ci_server",
+            "description": "ServiceNow table. Defaults to cmdb_ci_server.",
+            "type": "Optional[String[1]]"
+        },
+        "certname": {
+            "description": "The certname for the node for which the CIs are being created.",
             "type": "String[1]"
         },
-        "node": {
-            "description": "The node name for the CIs being created.",
-            "type": "Hash[Any, Any, 1]"
+        "fact_query_results": {
+            "description": "A PuppetDB fact query result set as a valid JSON string that will be used to create CIs in ServiceNow.",
+            "type": "String[1]"
+        },
+        "fact_map": {
+            "description": "A set of facts in valid json to send to ServiceNow to populate the new CI. A default set will be used if none is provided.",
+            "type": "Optional[String[1]]"
         },
         "user": {
             "description": "ServiceNow username",

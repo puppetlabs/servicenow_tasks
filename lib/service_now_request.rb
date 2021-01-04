@@ -16,7 +16,7 @@ class ServiceNowRequest
     @oauth_token = oauth_token
   end
 
-  def print_response
+  def print_response(return_hash: false)
     Net::HTTP.start(@uri.host,
                     @uri.port,
                     use_ssl: @uri.scheme == 'https',
@@ -37,8 +37,9 @@ class ServiceNowRequest
       response = http.request(request)
       if response.body && !response.body.empty?
         # Parse and print response
-        json_response = JSON.parse(response.body)
-        pretty_response = JSON.pretty_unparse(json_response)
+        hash_response = JSON.parse(response.body)
+        return hash_response if return_hash
+        pretty_response = JSON.pretty_unparse(hash_response)
         puts [pretty_response]
       end
     end

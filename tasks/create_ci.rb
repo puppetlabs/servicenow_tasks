@@ -3,25 +3,21 @@
 require_relative '../../ruby_task_helper/files/task_helper.rb'
 require_relative '../lib/service_now_request.rb'
 
-# This task creates records
+# This task creates a CI record in Servicenow based on a PuppetDB query
 class ServiceNowCreateCI < TaskHelper
   def task(table: 'cmdb_ci_server',
            user: nil,
            password: nil,
            instance: nil,
            oauth_token: nil,
-           node: 'puppet-master',
+           certname: nil,
+           fact_query_results: nil,
+           fact_map: fact_map,
            _target: nil,
            **_kwargs)
 
-    # Use the inventory file credentials if no user, password, or instance is passed in via parameters.
-    user = _target[:user] if user.nil?
-    password = _target[:password] if password.nil?
-    oauth_token = _target[:oauth_token] if oauth_token.nil?
-    instance = _target[:name] if instance.nil?
-
     # Map facts to populate when auto-creating CI's
-    fact_map = {
+    fact_map = JSON({
       # PuppetDB fact => ServiceNow CI field
       'fqdn'                   => 'fqdn',
       'domain'                 => 'dns_domain',
@@ -33,28 +29,42 @@ class ServiceNowCreateCI < TaskHelper
       'memorysize_mb'          => 'ram',
       'is_virtual'             => 'virtual',
       'macaddress'             => 'mac_address',
-    }
+    })
+    
+    # Example of a result fact set from PuppetDB
+    # fact_query_results_json = "[{\"name\":\"fqdn\",\"value\":\"puppet-master.c.splunk-275519.internal\"},{\"name\":\"domain\",\"value\":\"c.splunk-275519.internal\"},{\"name\":\"is_virtual\",\"value\":true},{\"name\":\"macaddress\",\"value\":\"42:01:0a:8a:00:03\"},{\"name\":\"processors\",\"value\":{\"isa\":\"x86_64\",\"count\":2,\"models\":[\"Intel(R) Xeon(R) CPU @ 2.20GHz\",\"Intel(R) Xeon(R) CPU @ 2.20GHz\"],\"physicalcount\":1}},{\"name\":\"serialnumber\",\"value\":\"GoogleCloud-F48713898D3A1DF97AF4AFC761243E4C\"},{\"name\":\"memorysize_mb\",\"value\":7812.03515625},{\"name\":\"processorcount\",\"value\":2},{\"name\":\"operatingsystemrelease\",\"value\":\"8.1.1911\"},{\"name\":\"physicalprocessorcount\",\"value\":1}]"
 
-    # Build a PuppetDB query to get relevant facts
-    fact_query_filter = []
-    fact_map.each do |fact, _field|
-      fact_name = fact.split('.')[0]
-      fact_query_filter.push("name='#{fact_name}'")
+    # Convert JSON parameters to ruby data structures
+    begin 
+      fact_query_results = JSON.parse(fact_query_results)
+    rescue JSON::ParserError => e
+      raise "Invalid fact_query_results json: #{e}"
     end
 
-    query = "facts[name,value] { (#{fact_query_filter.join(' or ')}) and certname = '#{node}' }"
+    begin 
+      fact_map = JSON.parse(fact_map)
+    rescue JSON::ParserError => e
+      raise "Invalid fact_map json: #{e}"
+    end
 
-    # Instantiate Bolt's PDB client directly
-    puppetdb_client = Puppet.lookup(:bolt_pdb_client)
+    # Use the inventory file credentials if no user, password, or instance is passed in via parameters.
+    if _target
+      user = _target[:user] if user.nil?
+      password = _target[:password] if password.nil?
+      oauth_token = _target[:oauth_token] if oauth_token.nil?
+      instance = _target[:name] if instance.nil?
+    end
 
-    # Query PuppetDB
-    fact_hash = puppetdb_client.make_query(query)
+    # This check is neccesary because all of these are optional params because they can be supplied through parameters or an inventory file.
+    unless (instance && user && password) || (instance && oauth_token)
+      raise "Please supply a ServiceNow instance, user, and password, or instance and oauth_token."
+    end
 
     # Convert the output to a more useable single hash (PDB returns an array of hashes)
-    facts = fact_hash.map { |item| [item['name'], item['value']] }.to_h
+    facts = fact_query_results.map { |item| [item['name'], item['value']] }.to_h
 
-    # Build the payload for ServiceNow, set the mandatory 'name' field to the node's certname
-    fact_payload = { 'name' => node }
+    # Build the payload for ServiceNow, set the mandatory 'name' field to the node's certname.
+    fact_payload = { 'name' => certname }
 
     # Add facts based on the fact_map at the start of the function
     fact_map.each do |fact, ci_field|
@@ -73,7 +83,8 @@ class ServiceNowCreateCI < TaskHelper
 
     uri = "https://#{instance}/api/now/table/#{table}"
     request = ServiceNowRequest.new(uri, 'Post', fact_payload, user, password, oauth_token)
-    JSON.parse(request.body)['result']['sys_id']
+    # Return the ServiceNow sys_id for the cmdb_ci entry we just created.
+    request.print_response(return_hash: true)['result']['sys_id']
   end
 end
 
