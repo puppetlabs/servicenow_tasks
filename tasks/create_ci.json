@@ -1,0 +1,35 @@
+{
+    "puppet_task_version": 1,
+    "supports_noop": false,
+    "description": "Create a ServiceNow CI",
+    "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now_request.rb"],
+    "remote": true,
+    "parameters": {
+        "table": {
+            "description": "ServiceNow table. Defaults to cmdb_ci_server",
+            "type": "String[1]"
+        },
+        "node": {
+            "description": "The node name for the CIs being created.",
+            "type": "Hash[Any, Any, 1]"
+        },
+        "user": {
+            "description": "ServiceNow username",
+            "type": "Optional[String[1]]"
+        },
+        "password": {
+            "description": "ServiceNow password",
+            "type": "Optional[String[1]]",
+            "sensitive": true
+        },
+        "instance": {
+            "description": "ServiceNow instance. For example, dev84270.service-now.com.",
+            "type": "Optional[String[1]]"
+        },
+        "oauth_token": {
+            "description": "ServiceNow OAuth token",
+            "type": "Optional[String[1]]",
+            "sensitive": true
+        }
+    }
+}
