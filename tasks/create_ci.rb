@@ -6,31 +6,26 @@ require_relative '../lib/service_now_request.rb'
 # This task creates a CI record in Servicenow based on a PuppetDB query
 class ServiceNowCreateCI < TaskHelper
   def task(table: 'cmdb_ci_server',
-           user: nil,
-           password: nil,
-           instance: nil,
-           oauth_token: nil,
-           certname: nil,
-           fact_query_results: nil,
-           fact_map: fact_map,
-           _target: nil,
-           **_kwargs)
+    user: nil,
+    password: nil,
+    instance: nil,
+    oauth_token: nil,
+    certname: nil,
+    fact_query_results: nil,
+    fact_map: JSON({# PuppetDB fact => ServiceNow CI field
+                    'fqdn'                   => 'fqdn',
+                    'domain'                 => 'dns_domain',
+                    'serialnumber'           => 'serial_number',
+                    'operatingsystemrelease' => 'os_version',
+                    'physicalprocessorcount' => 'cpu_count',
+                    'processorcount'         => 'cpu_core_count',
+                    'processors.models.0'    => 'cpu_type',
+                    'memorysize_mb'          => 'ram',
+                    'is_virtual'             => 'virtual',
+                    'macaddress'             => 'mac_address'}),
+    _target: nil,
+    **_kwargs)
 
-    # Map facts to populate when auto-creating CI's
-    fact_map = JSON({
-      # PuppetDB fact => ServiceNow CI field
-      'fqdn'                   => 'fqdn',
-      'domain'                 => 'dns_domain',
-      'serialnumber'           => 'serial_number',
-      'operatingsystemrelease' => 'os_version',
-      'physicalprocessorcount' => 'cpu_count',
-      'processorcount'         => 'cpu_core_count',
-      'processors.models.0'    => 'cpu_type',
-      'memorysize_mb'          => 'ram',
-      'is_virtual'             => 'virtual',
-      'macaddress'             => 'mac_address',
-    })
-    
     # Example of a result fact set from PuppetDB
     # fact_query_results_json = "[{\"name\":\"fqdn\",\"value\":\"puppet-master.c.splunk-275519.internal\"},{\"name\":\"domain\",\"value\":\"c.splunk-275519.internal\"},{\"name\":\"is_virtual\",\"value\":true},{\"name\":\"macaddress\",\"value\":\"42:01:0a:8a:00:03\"},{\"name\":\"processors\",\"value\":{\"isa\":\"x86_64\",\"count\":2,\"models\":[\"Intel(R) Xeon(R) CPU @ 2.20GHz\",\"Intel(R) Xeon(R) CPU @ 2.20GHz\"],\"physicalcount\":1}},{\"name\":\"serialnumber\",\"value\":\"GoogleCloud-F48713898D3A1DF97AF4AFC761243E4C\"},{\"name\":\"memorysize_mb\",\"value\":7812.03515625},{\"name\":\"processorcount\",\"value\":2},{\"name\":\"operatingsystemrelease\",\"value\":\"8.1.1911\"},{\"name\":\"physicalprocessorcount\",\"value\":1}]"
 
