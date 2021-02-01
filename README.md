@@ -18,7 +18,11 @@ servicenow_tasks provides a series of tasks to interact with a ServiceNow Instan
 * delete_record - Delete a ServiceNow record
 * create_ci     - Create a ServiceNow Configuration Item from Puppet facts
 
-These tasks have been tested with an Orlando developer instance.
+There is one additional plan that queries PDB for some basic facts for a given node and then calls the create_ci task.
+
+* create_ci_with_query - Create a ServiceNow Configuration Item from a PDB query
+
+These tasks/plans have been tested with an Orlando developer instance.
 
 ## Setup
 
@@ -90,3 +94,11 @@ fact_query_results="[{\"name\":\"fqdn\",\"value\":\"puppet-master.c.splunk-27551
 fact_map="{\"fqdn\":\"fqdn\",\"domain\":\"dns_domain\",\"serialnumber\":\"serial_number\",\"operatingsystemrelease\":\"os_version\",\"physicalprocessorcount\":\"cpu_count\",\"processorcount\":\"cpu_core_count\",\"processors.models.0\":\"cpu_type\",\"memorysize_mb\":\"ram\",\"is_virtual\":\"virtual\",\"macaddress\":\"mac_address\"}"
 ```
 Further example usage is provided via `bolt task show`
+
+### create_ci_with_query
+
+Given a node(certname), this plan will query for a default set of facts, and then use this set of facts to create CIs in ServiceNow. It utilizes the create_ci task to do this. As with the tasks, if an oauth token is provided, it will be used, otherwise username and password will be used. It returns the sys_id of the CI created.
+
+```bash
+puppet plan run servicenow_tasks::create_ci_with_query node=sadder-parsley.delivery.puppetlabs.net snow_instance=dev99218.service-now.com snow_username=admin snow_password=fancypassword
+```

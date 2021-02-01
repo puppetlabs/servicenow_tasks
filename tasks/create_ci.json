@@ -23,11 +23,11 @@
         },
         "user": {
             "description": "ServiceNow username",
-            "type": "Optional[String[1]]"
+            "type": "Optional[String]"
         },
         "password": {
             "description": "ServiceNow password",
-            "type": "Optional[String[1]]",
+            "type": "Optional[String]",
             "sensitive": true
         },
         "instance": {
@@ -36,7 +36,7 @@
         },
         "oauth_token": {
             "description": "ServiceNow OAuth token",
-            "type": "Optional[String[1]]",
+            "type": "Optional[String]",
             "sensitive": true
         }
     }
