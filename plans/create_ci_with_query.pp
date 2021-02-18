@@ -6,8 +6,10 @@ plan servicenow_tasks::create_ci_with_query(
   Sensitive[String] $snow_oauth_token = Sensitive('')
 ){
 
+    $test_node = {'node' => $node}
+
   # Get results from PDB
-  $result_set = servicenow_tasks::pdb_results($node)
+  $result_set = run_plan(servicenow_tasks::fact_query, $test_node)
 
   $default_args = { 'table'              => 'cmdb_ci_server',
                     'instance'           => $snow_instance,
