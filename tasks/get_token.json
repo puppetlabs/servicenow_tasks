@@ -1,0 +1,28 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Returns oauth token",
+  "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now.rb"],
+  "parameters": {
+    "instance": {
+      "description": "ServiceNow Instance. Example: dev106575.service-now.com",
+      "type": "String[1]"
+    },
+    "user": {
+      "description": "ServiceNow User",
+      "type": "String[1]"
+    },
+    "password": {
+      "description": "ServiceNow Password",
+      "type": "String[1]"
+    },
+    "client_id": {
+      "description": "ServiceNow Client ID",
+      "type": "String[1]"
+    },
+    "client_secret": {
+      "description": "ServiceNow Secret",
+      "type": "String[1]"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 #!/opt/puppetlabs/puppet/bin/ruby
 
 require_relative '../../ruby_task_helper/files/task_helper.rb'
-require_relative '../lib/service_now_request.rb'
+require_relative '../lib/service_now.rb'
 
 # This task creates a CI record in Servicenow based on a PuppetDB query
 class ServiceNowCreateCI < TaskHelper
@@ -30,13 +30,13 @@ class ServiceNowCreateCI < TaskHelper
     # fact_query_results_json = "[{\"name\":\"fqdn\",\"value\":\"puppet-master.c.splunk-275519.internal\"},{\"name\":\"domain\",\"value\":\"c.splunk-275519.internal\"},{\"name\":\"is_virtual\",\"value\":true},{\"name\":\"macaddress\",\"value\":\"42:01:0a:8a:00:03\"},{\"name\":\"processors\",\"value\":{\"isa\":\"x86_64\",\"count\":2,\"models\":[\"Intel(R) Xeon(R) CPU @ 2.20GHz\",\"Intel(R) Xeon(R) CPU @ 2.20GHz\"],\"physicalcount\":1}},{\"name\":\"serialnumber\",\"value\":\"GoogleCloud-F48713898D3A1DF97AF4AFC761243E4C\"},{\"name\":\"memorysize_mb\",\"value\":7812.03515625},{\"name\":\"processorcount\",\"value\":2},{\"name\":\"operatingsystemrelease\",\"value\":\"8.1.1911\"},{\"name\":\"physicalprocessorcount\",\"value\":1}]"
 
     # Convert JSON parameters to ruby data structures
-    begin 
+    begin
       fact_query_results = JSON.parse(fact_query_results)
     rescue JSON::ParserError => e
       raise "Invalid fact_query_results json: #{e}"
     end
 
-    begin 
+    begin
       fact_map = JSON.parse(fact_map)
     rescue JSON::ParserError => e
       raise "Invalid fact_map json: #{e}"
@@ -76,10 +76,9 @@ class ServiceNowCreateCI < TaskHelper
       end
     end
 
-    uri = "https://#{instance}/api/now/table/#{table}"
-    request = ServiceNowRequest.new(uri, 'Post', fact_payload, user, password, oauth_token)
+    client = ServiceNow.new(instance, user: user, password: password, oauth_token: oauth_token)
     # Return the ServiceNow sys_id for the cmdb_ci entry we just created.
-    request.print_response(return_hash: true)['result']['sys_id']
+    client.create_table_record(table, fact_payload.to_json)['result']['sys_id']
   end
 end
 

@@ -8,7 +8,7 @@ plan servicenow_tasks::create_ci_with_query(
 
     $test_node = {'node' => $node}
 
-  # Get results from PDB
+  # Get results from PDB by running the fact_query plan
   $result_set = run_plan(servicenow_tasks::fact_query, $test_node)
 
   $default_args = { 'table'              => 'cmdb_ci_server',
@@ -23,5 +23,6 @@ plan servicenow_tasks::create_ci_with_query(
   } else {
     $args = $default_args + { 'oauth_token'        => $snow_oauth_token.unwrap }
   }
+  #Create CI by running task
   run_task('servicenow_tasks::create_ci', [$node], $args)
 }

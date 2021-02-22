@@ -2,7 +2,7 @@
     "puppet_task_version": 1,
     "supports_noop": false,
     "description": "Create a ServiceNow record",
-    "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now_request.rb"],
+    "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now.rb"],
     "remote": true,
     "parameters": {
         "table": {
@@ -10,8 +10,8 @@
             "type": "String[1]"
         },
         "fields": {
-            "description": "ServiceNow fields. This is a hash of <field_name> => <value>",
-            "type": "Hash[Any, Any, 1]"
+            "description": "ServiceNow fields. This is a JSON hash of <field_name> => <value>",
+            "type": "String[1]"
         },
         "user": {
             "description": "ServiceNow username",
