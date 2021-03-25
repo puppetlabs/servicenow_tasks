@@ -23,7 +23,8 @@ class ServiceNowGetRecords < TaskHelper
       instance = _target[:name] if instance.nil?
     end
 
-    url_params ||= {}
+    url_params ||= {}.to_json
+    url_params = JSON.parse(url_params)
     url_params = url_params.map do |name, value|
       "#{CGI.escape(name.to_s)}=#{CGI.escape(value.to_s)}"
     end
