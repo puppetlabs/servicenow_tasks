@@ -1,0 +1,51 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Install a midserver on linux machine.",
+  "parameters": {
+    "sn-instance-version": {
+      "description": "The version of the ServiceNow instance.",
+      "type": "Enum[Paris, Quebec]",
+      "default": "Paris"
+    },
+    "sn-instance": {
+      "description": "Url of the Now instance.",
+      "type": "String[1]"
+    },
+    "mid-username": {
+      "description": "Username for the midserver user.",
+      "type": "String[1]",
+      "default": "MIDServer"
+    },
+    "mid-password": {
+      "description": "Password for the midserver user.",
+      "type": "String[1]",
+      "default": "password1"
+    },
+    "midserver-name": {
+      "description": "Name of the midserver.",
+      "type": "String[1]",
+      "default": "linux_midserver"
+    },
+    "app-name": {
+      "description": "Now midserver app name.",
+      "type": "String[1]",
+      "default": "midserver"
+    },
+    "app-long-name": {
+      "description": "Long Now midserver app name.",
+      "type": "String[1]",
+      "default": "midserver"
+    },
+    "non-root-midserver-user": {
+      "description": "Non root user on the midserver.",
+      "type": "String[1]",
+      "default": "midserver"
+    },
+    "java-keystore-password": {
+      "description": "Password for the java keystore.",
+      "type": "String[1]",
+      "default": "changeit"
+    }
+  }
+}
