@@ -2,6 +2,7 @@
   "puppet_task_version": 1,
   "supports_noop": false,
   "description": "Install a midserver on linux machine.",
+  "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now.rb"],
   "parameters": {
     "sn-instance-version": {
       "description": "The version of the ServiceNow instance.",
