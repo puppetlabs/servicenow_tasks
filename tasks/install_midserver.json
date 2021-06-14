@@ -4,46 +4,46 @@
   "description": "Install a midserver on linux machine.",
   "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now.rb"],
   "parameters": {
-    "sn-instance-version": {
+    "sn_instance_version": {
       "description": "The version of the ServiceNow instance.",
-      "type": "Enum[Paris, Quebec]",
+      "type": "Enum["Paris", "Quebec"]",
       "default": "Paris"
     },
-    "sn-instance": {
+    "sn_instance": {
       "description": "Url of the Now instance.",
       "type": "String[1]"
     },
-    "mid-username": {
+    "mid_username": {
       "description": "Username for the midserver user.",
       "type": "String[1]",
       "default": "MIDServer"
     },
-    "mid-password": {
+    "mid_password": {
       "description": "Password for the midserver user.",
       "type": "String[1]",
       "default": "password1"
     },
-    "midserver-name": {
+    "midserver_name": {
       "description": "Name of the midserver.",
       "type": "String[1]",
       "default": "linux_midserver"
     },
-    "app-name": {
+    "app_name": {
       "description": "Now midserver app name.",
       "type": "String[1]",
       "default": "midserver"
     },
-    "app-long-name": {
+    "app_long_name": {
       "description": "Long Now midserver app name.",
       "type": "String[1]",
       "default": "midserver"
     },
-    "non-root-midserver-user": {
+    "non_root_midserver_user": {
       "description": "Non root user on the midserver.",
       "type": "String[1]",
       "default": "midserver"
     },
-    "java-keystore-password": {
+    "java_keystore_password": {
       "description": "Password for the java keystore.",
       "type": "String[1]",
       "default": "changeit"
