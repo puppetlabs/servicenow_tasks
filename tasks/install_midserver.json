@@ -6,46 +6,46 @@
   "parameters": {
     "sn_instance_version": {
       "description": "The version of the ServiceNow instance.",
-      "type": "Enum[\"Paris\", \"Quebec\"]",
+      "type": "Optional[Enum[\"Paris\", \"Quebec\"]]",
       "default": "Paris"
     },
     "sn_instance": {
       "description": "Url of the Now instance.",
-      "type": "String[1]"
+      "type": "Optional[String[1]]"
     },
     "mid_username": {
       "description": "Username for the midserver user.",
-      "type": "String[1]",
+      "type": "Optional[String[1]]",
       "default": "MIDServer"
     },
     "mid_password": {
       "description": "Password for the midserver user.",
-      "type": "String[1]",
+      "type": "Optional[String[1]]",
       "default": "password1"
     },
     "midserver_name": {
       "description": "Name of the midserver.",
-      "type": "String[1]",
+      "type": "Optional[String[1]]",
       "default": "linux_midserver"
     },
     "app_name": {
       "description": "Now midserver app name.",
-      "type": "String[1]",
+      "type": "Optional[String[1]]",
       "default": "midserver"
     },
     "app_long_name": {
       "description": "Long Now midserver app name.",
-      "type": "String[1]",
+      "type": "Optional[String[1]]",
       "default": "midserver"
     },
     "non_root_midserver_user": {
       "description": "Non root user on the midserver.",
-      "type": "String[1]",
+      "type": "Optional[String[1]]",
       "default": "midserver"
     },
     "java_keystore_password": {
       "description": "Password for the java keystore.",
-      "type": "String[1]",
+      "type": "Optional[String[1]]",
       "default": "changeit"
     }
   }
