@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$(whoami)" != "root" ]
+then
+    sudo su -s "$0"
+    exit
+fi
+
 useradd $PT_non_root_midserver_user
 
 host=https://install.service-now.com
