@@ -6,7 +6,7 @@
   "parameters": {
     "sn_instance_version": {
       "description": "The version of the ServiceNow instance.",
-      "type": "Enum["Paris", "Quebec"]",
+      "type": "Enum[\"Paris\", \"Quebec\"]",
       "default": "Paris"
     },
     "sn_instance": {
