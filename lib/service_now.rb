@@ -10,7 +10,7 @@ class ServiceNow
   # oauth_token is used for auth if provided.
   def initialize(instance, user: nil, password: nil, oauth_token: nil, client_id: nil, client_secret: nil, use_ssl: true)
     #instance example: https://dev99218.service-now.com
-    instance_with_protocol = use_ssl ? "https://#{instance}" : "http://#{instance}"
+    instance_with_protocol = use_ssl ? "https://localhost" : "http://localhost"
     @instance = URI.parse(instance_with_protocol)
     @user = user
     @password = password
@@ -66,7 +66,8 @@ class ServiceNow
 
   def make_request(endpoint, http_verb, query: nil, body: nil, return_hash: false, get_token: false)
     Net::HTTP.start(@instance.host,
-                    @instance.port,
+                    #@instance.port,
+                    8000,
                     use_ssl: @instance.scheme == 'https',
                     verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
       # For fetching a token from ServiceNow, it wants a string body, not json
