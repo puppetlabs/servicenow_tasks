@@ -1,0 +1,71 @@
+{
+    "puppet_task_version": 1,
+    "supports_noop": false,
+    "description": "Install a MID Server on Linux",
+    "files": ["ruby_task_helper/files/task_helper.rb", "servicenow_tasks/lib/service_now.rb"],
+    "remote": true,
+    "parameters": {
+        "servicenow_instance_url": {
+            "description": "Enter the full URL of your instance, for example: https://mycompanyinstace.service-now.com",
+            "type": "String[1]"
+        },
+        "use_proxy":{
+            "description": "Enables the MID Server to use a web proxy to access the ServiceNow instance.",
+            "type": "Enum[\"Y\", \"N\"]",
+            "default": "N"
+        },
+        "mid_proxy_host":{
+            "description": "Set this parameter to define the web proxy's host.",
+            "type": "Optional[String[1]]"
+        },
+        "mid_proxy_port":{
+            "description": "Set this parameter to define the web proxy's port.",
+            "type": "Optional[String[1]]"
+        },
+        "mid_proxy_username":{
+            "description": "If the web proxy requires a user name, set this parameter to define that username.",
+            "type": "Optional[String[1]]"
+        },
+        "mid_proxy_password":{
+            "description": "If the web proxy requires a password, set this parameter to define that password.",
+            "type": "Optional[String[1]]",
+            "sensitive": true
+        },
+        "midserver_username": {
+            "description": "Enter the user name of the active MID Server user that you already created. The MID Server user must have the mid_server role.",
+            "type": "String[1]"
+        },
+        "midserver_password": {
+            "description": "Password of the current MID Server user.",
+            "type": "String[1]",
+            "sensitive": true
+        },
+        "midserver_name": {
+            "description": "Set the name of the MID Server to be shown in the ServiceNow instance.",
+            "type": "String[1]"
+        },
+        "app_name": {
+            "description": "Set a unique name for the daemon service of the current MID Server.",
+            "type": "Optional[String]",
+            "default": "midserver"
+        },
+        "app_long_name": {
+            "description": "Set a unique Long name for the deamon service of the current MID Server.",
+            "type": "Optional[String]",
+            "default": "ServiceNow_MIDServer"
+        },
+        "app_run_as_user": {
+            "description": "Set the username to run the deamon service as a non-root user.",
+            "type": "String[1]"
+        },
+        "sn_instance_version": {
+            "description": "List of ServiceNow Instance Versions.",
+            "type": "Enum[\"Quebec\", \"Rome\", \"SanDiego\"]"
+        },
+        "java_keystore_password": {
+            "description": "Password for the java keystore.",
+            "type": "Optional[String[1]]",
+            "default": "changeit"
+        }
+    }
+}
