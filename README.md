@@ -31,22 +31,8 @@ These tasks/plans have been tested with an Orlando and Paris developer instance.
 
 The [puppetlabs-ruby_task_helper](https://forge.puppet.com/puppetlabs/ruby_task_helper) module must be installed
 
-Tasks can be executed via Bolt by supplying a basic inventory file. For example, if you're using Bolt 1.x, this would look something like:
+Tasks can be executed via Bolt by supplying a basic inventory file. For example this would look something like:
 
-```bash
-nodes:
-  - name: dev84270.service-now.com
-    config:
-      transport: remote
-      remote:
-        user: admin
-        password: "XHxH2tmZ69*Vbh"
-        oauth_token: vXpDyYklhkNxwQ5ktr7WmTinZwq4-g-RSXtCVA5Y6JDKWU8-OBC3GUHbQIcWZyp1z1dKHK4_3-O8NQTzkWVCJw
-```
-
-> Bolt 1.x inventory entry
-
-If you're using Bolt 2.x, then this would look something like:
 
 ```bash
 targets:
