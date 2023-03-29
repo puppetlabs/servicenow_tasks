@@ -1,0 +1,14 @@
+{
+  "description": "Write common.yaml data from a given level or path.",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "parameters": {
+    "hiera_yaml_path": {
+      "description": "Absolute path to the directory containing the common.yaml file we are going to write to.",
+      "type": "Optional[String]"
+    },
+    "data": {
+      "description": "Hashmap of data to be written to common, at minimum a single {Key:Value} pair",
+      "type": "Hash"
+    }
+  }
+}

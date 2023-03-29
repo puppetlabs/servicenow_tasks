@@ -32,7 +32,7 @@ class ServiceNowGetRecords < TaskHelper
 
     client = ServiceNow.new(instance, user: user, password: password, oauth_token: oauth_token)
     client.get_table_records(table, url_params)
-    end
+  end
 end
 
 if $PROGRAM_NAME == __FILE__
