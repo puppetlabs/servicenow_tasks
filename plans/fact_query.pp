@@ -1,6 +1,6 @@
 plan servicenow_tasks::fact_query(
   String $node
-){
+) {
   # Get results from PDB
   $query = servicenow_tasks::pdb_results($node)
 
