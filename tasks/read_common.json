@@ -1,6 +1,6 @@
 {
   "description": "Parse common.yaml data from a given level or path.",
-  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "files": ["servicenow_tasks/files/snow_task_helper.rb"],
   "parameters": {
     "hiera_yaml_path": {
       "description": "Absolute path to the directory containing the common.yaml file we are going to parse from.",
